@@ -81,5 +81,21 @@ int	main(int ac, char **av)
 			perror("Failed to join thread");
 		i++;
 	}
+	i = 0;
+	while (i < data->philo_nb)
+	{
+		pthread_mutex_destroy(data->philos[i].left_fork);
+		free(data->philos[i].left_fork);
+		pthread_mutex_destroy(&data->philos[i].meals_eaten_mutex);
+		pthread_mutex_destroy(&data->philos[i].finish_eating_mutex);
+		pthread_mutex_destroy(&data->philos[i].last_meal_mutex);
+		pthread_mutex_destroy(&data->philos[i].has_thought_mutex);
+		i++;
+	}
+	pthread_mutex_destroy(&data->print_mutex);
+	pthread_mutex_destroy(&data->kill_all_mutex);
+	pthread_mutex_destroy(&data->start_time_mutex);
+	free(data->philos);
+	free(data);
 	return (0);
 }
