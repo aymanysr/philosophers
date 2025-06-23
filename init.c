@@ -42,7 +42,7 @@ int	data_initialization(t_data *data, int ac, char **av)
 	if (ac == 6)
 	{
 		data->must_eat = ft_atoi(av[5]);
-		if (data->must_eat <= 0)
+		if (data->must_eat < 0)
 			return (-1);
 	}
 	if ((data->philo_nb <= 0 || data->philo_nb > 200) || data->time_to_die < 60
