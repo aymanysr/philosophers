@@ -6,12 +6,14 @@
 /*   By: ayousr <ayousr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 23:42:08 by ayousr            #+#    #+#             */
-/*   Updated: 2025/06/22 06:36:04 by ayousr           ###   ########.fr       */
+/*   Updated: 2025/06/26 03:05:16 by ayousr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 int	philos_allocation(t_data *data)
 {
@@ -25,7 +27,12 @@ int	philos_allocation(t_data *data)
 	{
 		data->philos[i].left_fork = malloc(sizeof(pthread_mutex_t));
 		if (!data->philos[i].left_fork)
+		{
+			while (--i >= 0)
+				free(data->philos[i].left_fork);
+			free(data->philos);
 			return (-1);
+		}
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ayousr <ayousr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 23:30:46 by ayousr            #+#    #+#             */
-/*   Updated: 2025/06/22 06:35:41 by ayousr           ###   ########.fr       */
+/*   Updated: 2025/06/26 03:09:02 by ayousr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ long		get_start_time(t_philo *philo);
 long		get_last_meal(t_philo *philo);
 bool		get_finish_eating(t_philo *philo);
 int			get_meals_eaten(t_philo *philo);
-int			get_kill_all(t_data *data);
-int			get_has_thought_once(t_philo *philo);
+bool		get_kill_all(t_data *data);
+bool		get_has_thought_once(t_philo *philo);
 
 int			ft_atoi(const char *str);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ayousr <ayousr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 23:39:22 by ayousr            #+#    #+#             */
-/*   Updated: 2025/06/19 16:22:06 by ayousr           ###   ########.fr       */
+/*   Updated: 2025/06/26 03:05:36 by ayousr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	philo_thinks(t_philo *philo)
 	if (actual_think > max_think)
 		actual_think = max_think;
 	thread_safe_print(philo, "is thinking");
-	custom_usleep(actual_think);
+	if (actual_think > 0)
+		custom_usleep(actual_think);
 }
 
 void	philo_sleeps(t_philo *philo)

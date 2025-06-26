@@ -6,7 +6,7 @@
 /*   By: ayousr <ayousr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 23:39:16 by ayousr            #+#    #+#             */
-/*   Updated: 2025/06/18 23:47:38 by ayousr           ###   ########.fr       */
+/*   Updated: 2025/06/26 03:06:47 by ayousr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ bool	get_finish_eating(t_philo *philo)
 	return (sign);
 }
 
-int	get_kill_all(t_data *data)
+bool	get_kill_all(t_data *data)
 {
 	bool	sign;
 

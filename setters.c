@@ -6,18 +6,11 @@
 /*   By: ayousr <ayousr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 23:39:07 by ayousr            #+#    #+#             */
-/*   Updated: 2025/06/18 23:45:24 by ayousr           ###   ########.fr       */
+/*   Updated: 2025/06/26 00:48:46 by ayousr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// void set_start_time(t_philo *philo)
-// {
-//     pthread_mutex_lock(&philo->start_time_mutex);
-//     philo->start_time = gettime_millisec();
-//     pthread_mutex_unlock(&philo->start_time_mutex);
-// }
 
 void	set_last_meal(t_philo *philo)
 {

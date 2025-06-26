@@ -6,7 +6,7 @@
 /*   By: ayousr <ayousr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 23:24:28 by ayousr            #+#    #+#             */
-/*   Updated: 2025/06/19 18:24:46 by ayousr           ###   ########.fr       */
+/*   Updated: 2025/06/26 00:33:59 by ayousr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,28 +59,10 @@ int	philo_lifecycle(t_data *data)
 	return (0);
 }
 
-int	main(int ac, char **av)
+static void	cleanup_mutexes(t_data *data)
 {
-	t_data	*data;
-	int		i;
+	int	i;
 
-	data = malloc(sizeof(t_data));
-	if (ac != 5 && ac != 6)
-		return (printf("error in data initialization\n"), 1);
-	if (check_input(av))
-		return (1);
-	if (main_initialization(data, ac, av))
-		return (1);
-	if (philo_lifecycle(data))
-		return (1);
-	monitor(data);
-	i = 0;
-	while (i < data->philo_nb)
-	{
-		if (pthread_join(data->philos[i].thread, NULL) != 0)
-			perror("Failed to join thread");
-		i++;
-	}
 	i = 0;
 	while (i < data->philo_nb)
 	{
@@ -95,6 +77,39 @@ int	main(int ac, char **av)
 	pthread_mutex_destroy(&data->print_mutex);
 	pthread_mutex_destroy(&data->kill_all_mutex);
 	pthread_mutex_destroy(&data->start_time_mutex);
+}
+
+static void	join_threads(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->philo_nb)
+	{
+		if (pthread_join(data->philos[i].thread, NULL) != 0)
+			perror("Failed to join thread");
+		i++;
+	}
+}
+
+int	main(int ac, char **av)
+{
+	t_data	*data;
+
+	data = malloc(sizeof(t_data));
+	if (data == NULL)
+		return (perror("Failed to allocate memory for data"), 1);
+	if (ac != 5 && ac != 6)
+		return (perror("error in data initialization\n"), 1);
+	if (check_input(av))
+		return (1);
+	if (main_initialization(data, ac, av))
+		return (1);
+	if (philo_lifecycle(data))
+		return (1);
+	monitor(data);
+	join_threads(data);
+	cleanup_mutexes(data);
 	free(data->philos);
 	free(data);
 	return (0);

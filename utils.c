@@ -6,11 +6,12 @@
 /*   By: ayousr <ayousr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 23:39:00 by ayousr            #+#    #+#             */
-/*   Updated: 2025/06/23 18:50:59 by ayousr           ###   ########.fr       */
+/*   Updated: 2025/06/26 03:08:42 by ayousr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdio.h>
 
 int	check_input(char **av)
 {
@@ -36,12 +37,15 @@ int	check_input(char **av)
 	return (0);
 }
 
-// #include <sys/time.h> // Include this header for gettimeofday function
 long long	gettime_millisec(void)
 {
 	struct timeval	time;
 
-	gettimeofday(&time, NULL);
+	if (gettimeofday(&time, NULL) == -1)
+	{
+		perror("gettimeofday failed!");
+		return (-1);
+	}
 	return ((long long)time.tv_sec * 1000 + (long long)time.tv_usec / 1000);
 }
 
@@ -50,6 +54,8 @@ void	custom_usleep(unsigned long long time)
 	long long	start;
 
 	start = gettime_millisec();
+	if (start == -1)
+		return ;
 	while (gettime_millisec() - start < (long long)time)
 		usleep(50);
 }
@@ -66,7 +72,7 @@ void	thread_safe_print(t_philo *philo, char *str)
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
-int	get_has_thought_once(t_philo *philo)
+bool	get_has_thought_once(t_philo *philo)
 {
 	bool	sign;
 
