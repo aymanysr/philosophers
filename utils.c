@@ -6,7 +6,7 @@
 /*   By: ayousr <ayousr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 23:39:00 by ayousr            #+#    #+#             */
-/*   Updated: 2025/06/26 03:08:42 by ayousr           ###   ########.fr       */
+/*   Updated: 2025/06/30 00:23:03 by ayousr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,4 @@ void	thread_safe_print(t_philo *philo, char *str)
 			philo->id, str);
 	}
 	pthread_mutex_unlock(&philo->data->print_mutex);
-}
-
-bool	get_has_thought_once(t_philo *philo)
-{
-	bool	sign;
-
-	pthread_mutex_lock(&philo->has_thought_mutex);
-	sign = philo->has_thought_once;
-	pthread_mutex_unlock(&philo->has_thought_mutex);
-	return (sign);
 }
